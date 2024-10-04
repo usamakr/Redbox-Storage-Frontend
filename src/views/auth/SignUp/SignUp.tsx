@@ -22,13 +22,13 @@ const SignUp = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1.0 }}
                 transition={{ duration: 1 }}
-                className="flex flex-col gap-y-10  p-20 lg:p-20 lg:pt-4 pt-10 pb-10 h-full overflow-y-auto"
+                className="flex flex-col gap-y-10  p-10 lg:p-20 lg:pt-4 pt-10 pb-10 overflow-y-scroll h-[600px] "
             >
                 <div className="h-min  ">
                     <h3 className="mb-1 pt-3">Welcome to Redbox Storage.</h3>
                     <p className="">Let's sign you up!</p>
                 </div>
-                <div className="flex flex-col gap-4 h-max">
+                <div className="flex flex-col gap-4 h-max ">
                     <SignUpForm disableSubmit={false} className="pl-8 pr-8" />
                     <OrderPortalFooter />
                 </div>

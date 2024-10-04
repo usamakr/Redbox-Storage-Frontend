@@ -11,12 +11,6 @@ export const customerRoutes: Routes = [
         component: lazy(() => import('@/views/auth/OrderPortal')),
         authority: [],
     },
-    {
-        key: 'test',
-        path: `/test`,
-        component: lazy(() => import('@/views/test/TestPage')),
-        authority: [],
-    },
 ]
 
 export const protectedRoutes = [

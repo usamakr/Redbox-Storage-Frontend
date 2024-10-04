@@ -262,7 +262,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                                     onClick={onPrevious}
                                     type="button"
                                 >
-                                    {`Previous ${step}`}
+                                    {`Previous`}
                                 </Button>
                                 {step === SIGN_UP_STEPS ? (
                                     <Button
@@ -284,7 +284,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                                     <Button onClick={onNext}>Next</Button>
                                 ) : null}
                             </div>
-                            <div className="grid grid-cols-1 place-items-center">
+                            <div className="grid grid-cols-1 place-items-center mt-2">
                                 <span>Already have an account? </span>
                                 {/* <ActionLink to={'/'}>Sign in</ActionLink> */}
                                 <p
