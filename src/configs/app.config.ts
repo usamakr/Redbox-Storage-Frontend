@@ -3,6 +3,7 @@ export type AppConfig = {
     authenticatedEntryPath: string
     unAuthenticatedEntryPath: string
     orderPortalEntryPath: string
+    publicToken: string
     tourPath: string
     locale: string
     enableMock: boolean
@@ -13,10 +14,10 @@ const appConfig: AppConfig = {
     authenticatedEntryPath: '/home',
     unAuthenticatedEntryPath: '/sign-in',
     orderPortalEntryPath: '/order-portal',
-
+    publicToken: '1234',
     tourPath: '/',
     locale: 'en',
-    enableMock: true,
+    enableMock: false,
 }
 
 export default appConfig
