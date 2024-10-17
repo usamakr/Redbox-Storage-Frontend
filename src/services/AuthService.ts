@@ -8,6 +8,8 @@ import type {
     SignUpResponse,
 } from '@/@types/auth'
 
+const AUTHENTICATION_PREFIX = 'authentication'
+
 export async function apiSignIn(data: SignInCredential) {
     return ApiService.fetchData<SignInResponse>({
         url: '/authentication/signin',

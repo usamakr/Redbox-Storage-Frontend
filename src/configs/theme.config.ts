@@ -30,7 +30,7 @@ export type ThemeConfig = {
  * we recommend to use the configuration that generated from demo.
  */
 export const themeConfig: ThemeConfig = {
-    buttonColor: 'blue-700',
+    buttonColor: 'red-700',
     redBoxColor: 'red-600',
     themeColor: 'red',
     direction: THEME_ENUM.DIR_LTR,

@@ -28,6 +28,8 @@ import { useAppDispatch } from '@/store/hook'
 import { setMode } from '@/store/slices/auth/authMode'
 import { useDebounce } from '@/utils/useDebounce'
 import { themeConfig } from '@/configs/theme.config'
+import { motion } from 'framer-motion'
+import ErrorMessage from './ErrorMessage'
 
 interface SignUpFormProps extends CommonProps {
     disableSubmit?: boolean
@@ -49,9 +51,9 @@ const SignUpForm = (props: SignUpFormProps) => {
     const { disableSubmit = false, className } = props
 
     // Hooks
-
-    const { signUp } = useAuth()
+    const [submitError, setSubmitError] = useState<string>('')
     const [message, setMessage] = useTimeOutMessage()
+    const { signUp } = useAuth()
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('Please enter your first name'),
@@ -82,23 +84,31 @@ const SignUpForm = (props: SignUpFormProps) => {
 
             <Formik
                 initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    password: '',
-                    confirmPassword: '',
-                    email: '',
-                    phone: '',
-                    marketingConsent: true,
+                    firstName: 'Usama',
+                    lastName: 'Rashad',
+                    password: '123',
+                    confirmPassword: '123',
+                    email: 'usamakr@gmail.com',
+                    phone: '03185833437',
+                    marketingConsent: false,
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                    if (!disableSubmit) {
-                    } else {
-                        setSubmitting(false)
+                onSubmit={async (values, { setSubmitting }) => {
+                    if (disableSubmit) {
+                        return
+                    }
+
+                    setSubmitting(true)
+                    setSubmitError('')
+                    try {
+                        let signupResult = await signUp(values)
+                        setSubmitError(signupResult?.message)
+                    } catch (error: any) {
+                        setSubmitError(error.message)
                     }
                 }}
             >
-                {({ touched, errors, values }) => (
+                {({ touched, errors, values, isSubmitting }) => (
                     <Form>
                         <FormContainer>
                             <div className={classNames('mt-4 h-max ')}>
@@ -201,17 +211,23 @@ const SignUpForm = (props: SignUpFormProps) => {
                                     </Radio.Group>
                                 </FormItem>
                             </div>
-                            <div className="mt-2 pb-8 text-center">
+                            <div className="flex flex-col mt-2 pb-2 justify-center items-center">
                                 <Button
                                     disabled={false}
                                     variant="solid"
                                     type="submit"
                                     size="md"
                                     color={themeConfig.buttonColor}
+                                    loading={isSubmitting}
                                 >
                                     Let's go...
                                 </Button>
                             </div>
+                            <ErrorMessage isError={submitError !== ''}>
+                                <span className="text-red-500 font-bold">
+                                    {submitError}
+                                </span>
+                            </ErrorMessage>
                             <div className="grid grid-cols-1 place-items-center mt-2">
                                 <span>Already have an account? </span>
                                 {/* <ActionLink to={'/'}>Sign in</ActionLink> */}
