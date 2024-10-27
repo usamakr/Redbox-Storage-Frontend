@@ -17,6 +17,11 @@ BaseService.interceptors.request.use(
         const rawPersistData = localStorage.getItem(PERSIST_STORE_NAME)
         const persistData = deepParseJson(rawPersistData)
 
+        // If the auth is not loaded then show an error
+        if (!persistData) {
+            throw new Error('No default public token found.')
+        }
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let accessToken = (persistData as any).auth.session.token
 

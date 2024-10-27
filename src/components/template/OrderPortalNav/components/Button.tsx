@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import React, { ReactNode } from 'react'
 
 interface IButton {
-    size: 'sm' | 'lg'
-    children: ReactNode
+    size?: 'sm' | 'lg'
+    children?: ReactNode
 }
 
 function Button({ size = 'sm', children }: IButton) {

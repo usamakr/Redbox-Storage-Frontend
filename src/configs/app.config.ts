@@ -3,6 +3,8 @@ export type AppConfig = {
     authenticatedEntryPath: string
     unAuthenticatedEntryPath: string
     orderPortalEntryPath: string
+    adminDashboardEntryPath: string
+    externalAppEntryPath: string
     publicToken: string
     tourPath: string
     locale: string
@@ -14,6 +16,8 @@ const appConfig: AppConfig = {
     authenticatedEntryPath: '/home',
     unAuthenticatedEntryPath: '/sign-in',
     orderPortalEntryPath: '/order-portal',
+    adminDashboardEntryPath: '/admin',
+    externalAppEntryPath: '/app',
     publicToken: '1234',
     tourPath: '/',
     locale: 'en',

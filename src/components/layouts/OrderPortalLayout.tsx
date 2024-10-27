@@ -33,7 +33,7 @@ const OrderPortalLayout = () => {
                 {/* <SideNav /> */}
                 <div className="flex flex-col min-w-0  w-full max-h-screen relative">
                     <OrderPortalNav />
-                    <div className="flex flex-grow items-center justify-center w-full h-full ">
+                    <div className="flex flex-grow items-start justify-center w-full h-full ">
                         <View />
                     </div>
                 </div>

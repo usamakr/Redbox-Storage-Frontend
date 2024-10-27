@@ -13,6 +13,7 @@ import {
 import useAuth from '@/utils/hooks/useAuth'
 import useDirection from '@/utils/hooks/useDirection'
 import useLocale from '@/utils/hooks/useLocale'
+import BoxLoading from '../shared/loaders/BoxLoading'
 
 const layouts = {
     [LAYOUT_TYPE_ORDERPORTAL]: lazy(() => import('./OrderPortalLayout')),

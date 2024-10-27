@@ -1,1 +1,6 @@
-export { protectedRoutes, publicRoutes } from './routes.config'
+export {
+    publicRoutes,
+    adminRoutes,
+    appRoutes,
+    orderportalRoutes,
+} from './routes.config'

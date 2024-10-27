@@ -34,7 +34,6 @@ function useAuth() {
     > => {
         try {
             const resp = await apiSignIn(values)
-            console.log(`Response ${resp}`)
             if (resp.data) {
                 const { token } = resp.data
                 dispatch(signInSuccess(token))
@@ -58,14 +57,14 @@ function useAuth() {
                 )
                 return {
                     status: 'success',
-                    message: '',
+                    message: 'Login successfull...',
                 }
             }
             // eslint-disable-next-line  @typescript-eslint/no-explicit-any
         } catch (errors: any) {
             return {
                 status: 'failed',
-                message: errors?.response?.data?.message || errors.toString(),
+                message: errors?.response?.data?.error || errors.toString(),
             }
         }
     }

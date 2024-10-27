@@ -12,6 +12,9 @@ import * as Yup from 'yup'
 import type { CommonProps } from '@/@types/common'
 import { setMode } from '@/store/slices/auth/authMode'
 import { useAppDispatch } from '@/store/hook'
+import { themeConfig } from '@/configs/theme.config'
+import { useState } from 'react'
+import ErrorMessage from '../SignUp/ErrorMessage'
 
 interface SignInFormProps extends CommonProps {
     disableSubmit?: boolean
@@ -41,8 +44,11 @@ const SignInForm = (props: SignInFormProps) => {
         signUpUrl = '/sign-up',
     } = props
 
+    // States
     const [message, setMessage] = useTimeOutMessage()
+    const [submitError, setSubmitError] = useState<string>('')
 
+    // Hooks
     const { signIn } = useAuth()
     const dispatch = useAppDispatch()
 
@@ -62,6 +68,14 @@ const SignInForm = (props: SignInFormProps) => {
         setSubmitting(false)
     }
 
+    function signUp(values: {
+        email: string
+        password: string
+        rememberMe: boolean
+    }) {
+        throw new Error('Function not implemented.')
+    }
+
     return (
         <div className={className}>
             {message && (
@@ -71,16 +85,22 @@ const SignInForm = (props: SignInFormProps) => {
             )}
             <Formik
                 initialValues={{
-                    email: '',
-                    password: '',
+                    email: 'usamakr@gmail.com',
+                    password: '1234',
                     rememberMe: false,
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                    if (!disableSubmit) {
-                        onSignIn(values, setSubmitting)
-                    } else {
-                        setSubmitting(false)
+                onSubmit={async (values, { setSubmitting }) => {
+                    if (disableSubmit) {
+                        return
+                    }
+                    setSubmitting(true)
+                    setSubmitError('')
+                    try {
+                        let signinResult = await signIn(values)
+                        setSubmitError(signinResult?.message as string)
+                    } catch (error: any) {
+                        setSubmitError(error.message)
                     }
                 }}
             >
@@ -129,15 +149,25 @@ const SignInForm = (props: SignInFormProps) => {
                                     Forgot Password?
                                 </ActionLink>
                             </div>
-                            <Button
-                                block
-                                loading={isSubmitting}
-                                variant="solid"
-                                type="submit"
-                                disabled={false}
-                            >
-                                {isSubmitting ? 'Signing in...' : 'Sign In'}
-                            </Button>
+                            <div className="w-full text-center pb-2 mt-2">
+                                <Button
+                                    block
+                                    loading={isSubmitting}
+                                    variant="solid"
+                                    type="submit"
+                                    disabled={false}
+                                    color={themeConfig.buttonColor}
+                                    className="w-min"
+                                >
+                                    {isSubmitting ? 'Signing in...' : 'Sign In'}
+                                </Button>
+                            </div>
+                            <ErrorMessage isError={submitError !== ''}>
+                                <span className="text-red-500 font-bold">
+                                    {submitError}
+                                </span>
+                            </ErrorMessage>
+
                             <div className="mt-4 grid grid-cols-1 place-items-center">
                                 <span>{`Don't have an account yet?`} </span>
                                 {/* <ActionLink to={signUpUrl}>Sign up</ActionLink> */}

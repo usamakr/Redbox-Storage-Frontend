@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button'
 import Alert from '@/components/ui/Alert'
 import PasswordInput from '@/components/shared/PasswordInput'
 import useAuth from '@/utils/hooks/useAuth'
-import { Card, Checkbox, Radio, Steps } from '@/components/ui'
+import { Radio } from '@/components/ui'
 import type { CommonProps } from '@/@types/common'
 
 // Utilities
@@ -18,7 +18,7 @@ import * as Yup from 'yup'
 import { Field, Form, Formik } from 'formik'
 
 // React
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
 // Config
 import appConfig from '@/configs/app.config'
@@ -26,9 +26,7 @@ import appConfig from '@/configs/app.config'
 // Hooks
 import { useAppDispatch } from '@/store/hook'
 import { setMode } from '@/store/slices/auth/authMode'
-import { useDebounce } from '@/utils/useDebounce'
 import { themeConfig } from '@/configs/theme.config'
-import { motion } from 'framer-motion'
 import ErrorMessage from './ErrorMessage'
 
 interface SignUpFormProps extends CommonProps {
@@ -54,6 +52,7 @@ const SignUpForm = (props: SignUpFormProps) => {
     const [submitError, setSubmitError] = useState<string>('')
     const [message, setMessage] = useTimeOutMessage()
     const { signUp } = useAuth()
+    const dispatch = useAppDispatch()
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('Please enter your first name'),
@@ -97,7 +96,6 @@ const SignUpForm = (props: SignUpFormProps) => {
                     if (disableSubmit) {
                         return
                     }
-
                     setSubmitting(true)
                     setSubmitError('')
                     try {
@@ -233,7 +231,9 @@ const SignUpForm = (props: SignUpFormProps) => {
                                 {/* <ActionLink to={'/'}>Sign in</ActionLink> */}
                                 <p
                                     className="cursor-pointer text-red-500 hover:underline w-min text-nowrap"
-                                    onClick={() => {}}
+                                    onClick={() => {
+                                        dispatch(setMode('signin'))
+                                    }}
                                 >
                                     Sign In
                                 </p>

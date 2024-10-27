@@ -14,8 +14,11 @@ import NavButtons from './NavButtons'
 import AuthButtons from './AuthButtons'
 import NavButton from './Button'
 import classNames from 'classnames'
+import { setMode } from '@/store/slices/auth/authMode'
+import { useAppDispatch } from '@/store'
 
 function BurgerNav() {
+    const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState(false)
 
     const openDrawer = () => {
@@ -24,6 +27,13 @@ function BurgerNav() {
 
     const onDrawerClose = (e: MouseEvent) => {
         setIsOpen(false)
+    }
+
+    const gotoLoginPage = () => {
+        dispatch(setMode('signin'))
+    }
+    const gotoSignupPage = () => {
+        dispatch(setMode('signup'))
     }
 
     return (
@@ -54,6 +64,7 @@ function BurgerNav() {
                             variant="default"
                             size="sm"
                             style={{ padding: '0.1rem' }}
+                            onClick={gotoLoginPage}
                         >
                             Login
                         </Button>
@@ -61,6 +72,7 @@ function BurgerNav() {
                             variant="solid"
                             size="sm"
                             style={{ padding: '0.1rem' }}
+                            onClick={gotoSignupPage}
                         >
                             Sign Up
                         </Button>

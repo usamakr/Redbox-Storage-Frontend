@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import Loading from '@/components/shared/Loading'
-import { protectedRoutes, publicRoutes } from '@/configs/routes.config'
+import { adminRoutes, publicRoutes } from '@/configs/routes.config'
 import appConfig from '@/configs/app.config'
 import PageContainer from '@/components/template/PageContainer'
 import { Routes, Route, Navigate } from 'react-router-dom'
@@ -10,7 +10,7 @@ import PublicRoute from '@/components/route/PublicRoute'
 import AuthorityGuard from '@/components/route/AuthorityGuard'
 import AppRoute from '@/components/route/AppRoute'
 import type { LayoutType } from '@/@types/theme'
-import { customerRoutes } from '@/configs/routes.config/routes.config'
+import BoxLoading from '@/components/shared/loaders/BoxLoading'
 
 interface ViewsProps {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
@@ -19,19 +19,24 @@ interface ViewsProps {
 
 type AllRoutesProps = ViewsProps
 
-const { authenticatedEntryPath, orderPortalEntryPath } = appConfig
+const {
+    authenticatedEntryPath,
+    orderPortalEntryPath,
+    adminDashboardEntryPath,
+    externalAppEntryPath,
+} = appConfig
 
 const AllRoutes = (props: AllRoutesProps) => {
-    const userAuthority = useAppSelector((state) => state.auth.user.authority)
+    const userAuthority = useAppSelector((state) => state.auth.user.roles)
 
     return (
         <Routes>
-            {/* <Route path="/" element={<ProtectedRoute />}>
-                <Route
-                    path="/"
-                    element={<Navigate replace to={orderPortalEntryPath} />}
-                />
-                {protectedRoutes.map((route, index) => (
+            <Route path="/hq" element={<ProtectedRoute />}>
+                {/* <Route
+                    path="admin"
+                    element={<Navigate replace to={adminDashboardEntryPath} />}
+                /> */}
+                {adminRoutes.map((route, index) => (
                     <Route
                         key={route.key + index}
                         path={route.path}
@@ -40,21 +45,19 @@ const AllRoutes = (props: AllRoutesProps) => {
                                 userAuthority={userAuthority}
                                 authority={route.authority}
                             >
-                                <PageContainer {...props} {...route.meta}>
+                                <PageContainer {...props}>
                                     <AppRoute
                                         routeKey={route.key}
                                         component={route.component}
-                                        {...route.meta}
                                     />
                                 </PageContainer>
                             </AuthorityGuard>
                         }
                     />
                 ))}
-                <Route path="*" element={<Navigate replace to="/" />} />
-            </Route> */}
+            </Route>
             <Route path="/" element={<PublicRoute />}>
-                {customerRoutes.map((route) => (
+                {publicRoutes.map((route) => (
                     <Route
                         key={route.path}
                         path={route.path}
@@ -68,6 +71,10 @@ const AllRoutes = (props: AllRoutesProps) => {
                     />
                 ))}
             </Route>
+            <Route
+                path="*"
+                element={<Navigate replace to="/access-denied" />}
+            />
         </Routes>
     )
 }
