@@ -8,7 +8,7 @@ import { DoubleSidedImage } from '@/components/shared'
 
 const AccessDenied = () => {
     return (
-        <Container className="h-full">
+        <Container className="h-4/5">
             <div className="h-full flex flex-col items-center justify-center">
                 <DoubleSidedImage
                     src="/img/others/img-2.png"
@@ -16,9 +16,9 @@ const AccessDenied = () => {
                     alt="Access Denied!"
                 />
                 <div className="mt-6 text-center">
-                    <h3 className="mb-2">Access Denied!</h3>
+                    <h3 className="mb-2">Access Denied</h3>
                     <p className="text-base">
-                        You have no permission to visit this page
+                        You do not have permission to visit this page
                     </p>
                 </div>
             </div>

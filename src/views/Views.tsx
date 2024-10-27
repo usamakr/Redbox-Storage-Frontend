@@ -40,19 +40,7 @@ const AllRoutes = (props: AllRoutesProps) => {
                     <Route
                         key={route.key + index}
                         path={route.path}
-                        element={
-                            <AuthorityGuard
-                                userAuthority={userAuthority}
-                                authority={route.authority}
-                            >
-                                <PageContainer {...props}>
-                                    <AppRoute
-                                        routeKey={route.key}
-                                        component={route.component}
-                                    />
-                                </PageContainer>
-                            </AuthorityGuard>
-                        }
+                        element={<route.component />}
                     />
                 ))}
             </Route>
@@ -61,13 +49,7 @@ const AllRoutes = (props: AllRoutesProps) => {
                     <Route
                         key={route.path}
                         path={route.path}
-                        element={
-                            <AppRoute
-                                routeKey={route.key}
-                                component={route.component}
-                                {...route.meta}
-                            />
-                        }
+                        element={<route.component />}
                     />
                 ))}
             </Route>
