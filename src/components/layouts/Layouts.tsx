@@ -35,10 +35,11 @@ const Layout = () => {
     useLocale()
 
     const AppLayout = useMemo(() => {
+        return lazy(() => import('./OrderPortalLayout'))
+
         if (authenticated) {
             return layouts[layoutType]
         }
-        return lazy(() => import('./OrderPortalLayout'))
     }, [layoutType, authenticated])
 
     return (

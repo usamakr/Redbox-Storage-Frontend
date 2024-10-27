@@ -3,15 +3,26 @@ import Lottie from 'lottie-react'
 
 // Animations
 import AccessDeniedAnim from '@/assets/lottie/AccessDenied.json'
+import Container from '@/components/shared/Container'
+import { DoubleSidedImage } from '@/components/shared'
 
-function AccessDenied() {
+const AccessDenied = () => {
     return (
-        <div className="h-full w-full grid grid-cols-1 place-items-center">
-            <div className="h-[100px] w-[100px]">
-                <Lottie animationData={AccessDeniedAnim} loop={false} />
+        <Container className="h-full">
+            <div className="h-full flex flex-col items-center justify-center">
+                <DoubleSidedImage
+                    src="/img/others/img-2.png"
+                    darkModeSrc="/img/others/img-2-dark.png"
+                    alt="Access Denied!"
+                />
+                <div className="mt-6 text-center">
+                    <h3 className="mb-2">Access Denied!</h3>
+                    <p className="text-base">
+                        You have no permission to visit this page
+                    </p>
+                </div>
             </div>
-            <p>Access denied.</p>
-        </div>
+        </Container>
     )
 }
 
