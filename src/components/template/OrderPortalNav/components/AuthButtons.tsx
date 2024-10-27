@@ -13,9 +13,11 @@ function AuthButtons() {
 
     const gotoLoginPage = () => {
         dispatch(setMode('signin'))
+        navigate('/sign-in')
     }
     const gotoSignupPage = () => {
         dispatch(setMode('signup'))
+        navigate('/sign-up')
     }
 
     return (
