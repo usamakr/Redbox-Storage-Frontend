@@ -214,8 +214,8 @@ const SignUpForm = (props: SignUpFormProps) => {
                                     disabled={false}
                                     variant="solid"
                                     type="submit"
-                                    size="md"
-                                    color={themeConfig.buttonColor}
+                                    size="sm"
+                                    // color={themeConfig.buttonColor}
                                     loading={isSubmitting}
                                 >
                                     Let's go...

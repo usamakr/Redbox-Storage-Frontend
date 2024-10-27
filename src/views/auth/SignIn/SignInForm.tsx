@@ -156,7 +156,8 @@ const SignInForm = (props: SignInFormProps) => {
                                     variant="solid"
                                     type="submit"
                                     disabled={false}
-                                    color={themeConfig.buttonColor}
+                                    size="sm"
+                                    // color={themeConfig.buttonColor}
                                     className="w-min"
                                 >
                                     {isSubmitting ? 'Signing in...' : 'Sign In'}
