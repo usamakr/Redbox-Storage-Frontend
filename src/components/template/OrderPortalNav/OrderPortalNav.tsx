@@ -9,7 +9,7 @@ function OrderPortalNav() {
     return (
         <div
             className={classNames(
-                'grid grid-cols-3 items-center  p-2 border-b justify-center  border-gray-300',
+                'grid grid-cols-3 items-center    justify-center  border-gray-300',
                 '',
             )}
         >
