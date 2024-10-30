@@ -7,12 +7,7 @@ import Navigation from './components/Navigation'
 
 function OrderPortalNav() {
     return (
-        <div
-            className={classNames(
-                'grid grid-cols-3 items-center    justify-center  border-gray-300',
-                '',
-            )}
-        >
+        <div className={classNames('grid grid-cols-3 p-2', 'shadow-md')}>
             {/* Left side with logo */}
             <div className="col-span-1">
                 <RedBox />
